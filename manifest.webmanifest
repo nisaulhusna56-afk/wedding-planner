@@ -1,0 +1,9 @@
+{
+  "name": "Wedding Planner Reza & Manda",
+  "short_name": "Wedding Planner",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f3e7",
+  "theme_color": "#46533b",
+  "description": "Catatan budget dan persiapan pernikahan."
+}

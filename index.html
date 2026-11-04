@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#46533b"><meta name="description" content="Wedding Planner Reza & Manda">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Wedding Planner</title>
+<style>
+:root{--army:#46533b;--army2:#69764f;--mustard:#d5a52c;--cream:#f7f3e7;--paper:#fffdf7;--ink:#34382e;--muted:#858779;--line:#e9e6d9}
+*{box-sizing:border-box}body{margin:0;background:#f3f1e8;color:var(--ink);font:14px system-ui,Segoe UI,sans-serif}
+header,.wrap{max-width:980px;margin:auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;gap:10px;align-items:center}.logo{background:var(--army);color:white;border-radius:13px;padding:11px;font-size:22px}
+h1{font-size:18px;margin:0}small,.muted{color:var(--muted)}.tabs{display:flex;gap:8px;overflow:auto;padding:0 16px 12px;max-width:980px;margin:auto}
+button{border:0;cursor:pointer;font:inherit}.tab,.btn{padding:9px 13px;border-radius:11px;font-weight:700;white-space:nowrap}.tab{background:#e9e7dc;color:var(--army)}.tab.active,.primary{background:var(--army);color:white}.gold{background:var(--mustard);color:#302b1e}
+main{max-width:980px;margin:auto;padding:0 16px 30px;display:grid;gap:13px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px}
+.hero{background:linear-gradient(120deg,#46533b,#788052);color:white;border:0}.hero .muted{color:#e2e5d8}
+.flex{display:flex;justify-content:space-between;align-items:center;gap:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{background:#f5f3e9;padding:12px;border-radius:12px}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:15px}.count div{background:#ffffff20;border-radius:11px;padding:10px;text-align:center}.count b{display:block;font-size:22px}
+.donut{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--mustard) var(--pct),#eeeadd 0);position:relative;flex-shrink:0}.donut:after{content:"";position:absolute;inset:11px;background:var(--paper);border-radius:50%}.donut b{z-index:1}
+.progress{height:7px;border-radius:20px;background:#eceade;overflow:hidden;margin-top:7px}.progress span{display:block;height:100%;background:var(--army2)}
+.row{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}.ico{width:38px;height:38px;background:#f1eedf;border-radius:11px;display:grid;place-items:center;font-size:18px;flex-shrink:0}.grow{flex:1;min-width:0}.right{text-align:right}.tag{font-size:10px;background:#f2ebd2;padding:4px 8px;border-radius:20px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink)}label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin:0 0 5px}.field{margin:11px 0}
+.hidden{display:none!important}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{font-size:12px;padding:7px 9px;border-radius:8px;background:#eeecdf;color:var(--army)}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:11px}
+@media(min-width:720px){main{grid-template-columns:1fr 1fr}main .wide{grid-column:1/-1}.tabs{padding-left:16px}}
+</style></head>
+<body>
+<header><div class="brand"><div class="logo">♡</div><div><h1>Wedding Planner</h1><small>Our special day ✨</small></div></div><div class="right"><small>THE WEDDING OF</small><div><b>Reza & Manda</b></div></div></header>
+<nav class="tabs"><button class="tab active" data-page="home">⌂ Beranda</button><button class="tab" data-page="budget">▤ Anggaran</button><button class="tab" data-page="vendors">♧ Vendor</button><button class="tab" data-page="tasks">♡ Persiapan</button></nav>
+<main>
+<section id="home" class="wide">
+ <div class="panel hero"><small class="muted">COUNTDOWN TO OUR WEDDING</small><div class="flex"><h2>Hari Bahagia 💍</h2><button class="btn gold" id="dateBtn">Atur tanggal</button></div><div id="dateLabel" class="muted">Tentukan tanggal pernikahan</div><div class="count"><div><b id="days">--</b><small>HARI</small></div><div><b id="hours">--</b><small>JAM</small></div><div><b id="mins">--</b><small>MENIT</small></div><div><b id="secs">--</b><small>DETIK</small></div></div></div>
+</section>
+<section id="summary" class="panel"><div class="flex"><b>Ringkasan Anggaran</b><button class="btn primary" data-go="budget">Detail →</button></div><div class="flex" style="margin:16px 0"><div class="donut" id="donut"><b id="percent">0%</b></div><div class="grow"><small>Total pengeluaran</small><h2 id="spent">Rp 0</h2><small>Total budget</small><b id="budgetLabel">Rp 0</b></div></div><div class="grid"><div class="metric"><small>Sudah dibayar</small><h3 id="paid">Rp 0</h3></div><div class="metric"><small>Sisa anggaran</small><h3 id="remaining">Rp 0</h3></div></div></section>
+<section id="homeExpenses" class="panel"><div class="flex"><b>Rincian Pengeluaran</b><button class="btn primary" id="addExpense">+ Tambah</button></div><div id="homeRows"></div></section>
+<section id="budget" class="hidden wide"><div class="panel"><b>Pengaturan Budget</b><div class="field"><label>Total budget (Rp)</label><input type="number" id="budgetInput"></div><button class="btn primary" id="saveBudget">Simpan budget</button></div><div class="panel" style="margin-top:12px"><div class="flex"><b>Semua Rincian Biaya</b><button class="btn primary" id="addExpense2">+ Tambah pos</button></div><div id="allRows"></div></div></section>
+<section id="vendors" class="panel hidden wide"><div class="flex"><b>Daftar Vendor</b><button class="btn primary" id="addVendor">+ Tambah Vendor</button></div><div id="vendorRows"></div></section>
+<section id="tasks" class="panel hidden wide"><div class="flex"><b>Checklist Persiapan</b><button class="btn primary" id="addTask">+ Tambah</button></div><div id="taskRows"></div></section>
+</main><footer>Wedding Planner • Data tersimpan di perangkat ini. Ekspor cadangan secara berkala.</footer>
+<script>
+const $=id=>document.getElementById(id), money=n=>'Rp '+Number(n||0).toLocaleString('id-ID'), short=n=>n>=1e6?'Rp '+(n/1e6).toLocaleString('id-ID',{maximumFractionDigits:1})+' jt':money(n);
+const seed={budget:75000000,date:'',expenses:[
+{id:1,name:'Gedung & Tempat',cat:'Venue',amount:15000000,paid:7500000,icon:'🏛️',vendor:'Gedung Bahagia'},
+{id:2,name:'Katering',cat:'Konsumsi',amount:15000000,paid:7500000,icon:'🍽️',vendor:'Cita Rasa Catering'},
+{id:3,name:'Foto & Video',cat:'Dokumentasi',amount:10000000,paid:0,icon:'📸',vendor:'Moment Studio'},
+{id:4,name:'Dekorasi',cat:'Dekorasi',amount:8000000,paid:2500000,icon:'🌸',vendor:'Bloom Decoration'},
+{id:5,name:'Busana & Makeup',cat:'Busana',amount:6500000,paid:2500000,icon:'👗',vendor:'MUA & Bridal'},
+{id:6,name:'Undangan & Souvenir',cat:'Lainnya',amount:3000000,paid:0,icon:'💌',vendor:'Belum ditentukan'}],
+vendors:[{name:'Gedung Bahagia',cat:'Venue',phone:'-',cost:15000000,paid:7500000},{name:'Cita Rasa Catering',cat:'Katering',phone:'-',cost:15000000,paid:7500000},{name:'Moment Studio',cat:'Foto & Video',phone:'-',cost:10000000,paid:0},{name:'Bloom Decoration',cat:'Dekorasi',phone:'-',cost:8000000,paid:2500000}],
+tasks:['Menentukan tanggal pernikahan','Menentukan lokasi akad & resepsi','Memesan gedung','Memilih katering','Memilih dekorasi','Memesan fotografer','Memilih busana pengantin','Menyebarkan undangan'].map((name,i)=>({id:i+1,name,done:i<3}))};
+let data;try{data=JSON.parse(localStorage.getItem('weddingPlannerData'))||seed}catch(e){data=seed}
+function save(){localStorage.setItem('weddingPlannerData',JSON.stringify(data))}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function row(e){return `<div class="row"><div class="ico">${esc(e.icon||'💍')}</div><div class="grow"><b>${esc(e.name)}</b><div class="muted">${esc(e.vendor||e.cat)}</div><div class="progress"><span style="width:${e.amount?Math.min(100,e.paid/e.amount*100):0}%"></span></div></div><div class="right"><b>${short(e.amount)}</b><div class="muted">${e.paid>=e.amount?'Lunas':'Belum lunas'}</div><div class="actions"><button data-edit="${e.id}">Edit</button><button data-del="${e.id}">Hapus</button></div></div></div>`}
+function render(){let spent=data.expenses.reduce((a,e)=>a+e.amount,0),paid=data.expenses.reduce((a,e)=>a+e.paid,0),p=data.budget?Math.round(spent/data.budget*100):0;
+$('spent').textContent=short(spent);$('paid').textContent=short(paid);$('remaining').textContent=short(data.budget-spent);$('budgetLabel').textContent=short(data.budget);$('percent').textContent=p+'%';$('donut').style.setProperty('--pct',Math.min(100,p)+'%');$('budgetInput').value=data.budget;
+$('homeRows').innerHTML=data.expenses.slice(0,4).map(row).join('');$('allRows').innerHTML=data.expenses.map(row).join('');
+$('vendorRows').innerHTML=data.vendors.map((v,i)=>`<div class="row"><div class="ico">♧</div><div class="grow"><b>${esc(v.name)}</b><div class="muted">${esc(v.cat)} · ${esc(v.phone)}</div><small>${short(v.paid)} / ${short(v.cost)} dibayar</small></div><button class="btn" data-vendor="${i}">Edit</button></div>`).join('');
+let done=data.tasks.filter(t=>t.done).length;$('taskRows').innerHTML=`<p class="muted">${done} dari ${data.tasks.length} selesai</p><div class="progress"><span style="width:${data.tasks.length?done/data.tasks.length*100:0}%"></span></div>`+data.tasks.map(t=>`<div class="row"><input style="width:19px" type="checkbox" data-check="${t.id}" ${t.done?'checked':''}><div class="grow">${esc(t.name)}</div><button data-taskdel="${t.id}">✕</button></div>`).join('');
+$('dateLabel').textContent=data.date?'Tanggal: '+new Date(data.date+'T12:00:00').toLocaleDateString('id-ID',{dateStyle:'long'}):'Tentukan tanggal pernikahan';}
+function page(id){['home','budget','vendors','tasks'].forEach(x=>$(x).classList.toggle('hidden',x!==id));document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.page===id))}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>page(b.dataset.go));
+$('saveBudget').onclick=()=>{data.budget=Math.max(0,Number($('budgetInput').value));save();render();alert('Budget disimpan')};
+function form(title,fields,cb){let box=document.createElement('dialog');box.style.cssText='border:0;border-radius:16px;padding:20px;width:min(440px,92vw);box-shadow:0 12px 60px #0004';box.innerHTML=`<form method="dialog"><h3>${title}</h3>${fields}<div class="actions"><button class="btn">Batal</button><button class="btn primary" id="ok">Simpan</button></div></form>`;document.body.append(box);box.showModal();box.querySelector('#ok').onclick=e=>{e.preventDefault();let vals={};box.querySelectorAll('[name]').forEach(x=>vals[x.name]=x.value);if(cb(vals)!==false){save();render();box.close();box.remove()}};box.addEventListener('close',()=>box.remove())}
+const f=(label,name,type='text',value='')=>`<div class="field"><label>${label}</label><input name="${name}" type="${type}" value="${esc(value)}" required></div>`;
+function expenseForm(e){form(e?'Edit Pos Biaya':'Tambah Pos Biaya',f('Nama pengeluaran','name','text',e?.name||'')+f('Kategori','cat','text',e?.cat||'Lainnya')+f('Total biaya (Rp)','amount','number',e?.amount||0)+f('Sudah dibayar (Rp)','paid','number',e?.paid||0)+f('Vendor','vendor','text',e?.vendor||'')+f('Emoji','icon','text',e?.icon||'💍'),v=>{let a=+v.amount,p=+v.paid;if(!v.name||a<0||p<0||p>a){alert('Periksa nominal pembayaran.');return false}let obj={...e,...v,amount:a,paid:p,id:e?.id||Date.now()};if(e)data.expenses=data.expenses.map(x=>x.id===e.id?obj:x);else data.expenses.push(obj)})}
+$('addExpense').onclick=$('addExpense2').onclick=()=>expenseForm();$('dateBtn').onclick=()=>form('Tanggal Pernikahan',f('Tanggal','date','date',data.date),v=>{data.date=v.date;updateDate()});
+$('addVendor').onclick=()=>form('Tambah Vendor',f('Nama vendor','name')+f('Kategori','cat')+f('Nomor kontak','phone')+f('Total kesepakatan (Rp)','cost','number',0)+f('Sudah dibayar (Rp)','paid','number',0),v=>{if(+v.paid>+v.cost){alert('Pembayaran melebihi biaya');return false}data.vendors.push({...v,cost:+v.cost,paid:+v.paid})});
+$('addTask').onclick=()=>form('Tambah Checklist',f('Nama tugas','name'),v=>data.tasks.push({id:Date.now(),name:v.name,done:false}));
+document.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.edit)expenseForm(data.expenses.find(x=>x.id==b.dataset.edit));if(b.dataset.del){data.expenses=data.expenses.filter(x=>x.id!=b.dataset.del);save();render()}if(b.dataset.vendor!==undefined){let v=data.vendors[+b.dataset.vendor];form('Edit Vendor',f('Nama','name','text',v.name)+f('Kategori','cat','text',v.cat)+f('Nomor kontak','phone','text',v.phone)+f('Total biaya','cost','number',v.cost)+f('Sudah dibayar','paid','number',v.paid),x=>{if(+x.paid>+x.cost){alert('Pembayaran melebihi biaya');return false}data.vendors[+b.dataset.vendor]={...x,cost:+x.cost,paid:+x.paid}})}if(b.dataset.taskdel){data.tasks=data.tasks.filter(t=>t.id!=b.dataset.taskdel);save();render()}});
+document.addEventListener('change',e=>{if(e.target.dataset.check){let t=data.tasks.find(t=>t.id==e.target.dataset.check);t.done=e.target.checked;save();render()}});
+function updateDate(){render();tick()}function tick(){if(!data.date)return;let d=new Date(data.date+'T00:00:00').getTime()-Date.now();if(d<0){$('days').textContent='0';$('hours').textContent='0';$('mins').textContent='0';$('secs').textContent='0';return}for(let [id,n] of [['days',Math.floor(d/86400000)],['hours',Math.floor(d%86400000/3600000)],['mins',Math.floor(d%3600000/60000)],['secs',Math.floor(d%60000/1000)]])$(id).textContent=n}
+render();tick();setInterval(tick,1000);
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script></body></html>
